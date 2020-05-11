@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cidadao{% endblock %}
+
+{% block body %}
+    <h1>Cidadao</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cidadao.id }}</td>
+            </tr>
+            <tr>
+                <th>Nome</th>
+                <td>{{ cidadao.nome }}</td>
+            </tr>
+            <tr>
+                <th>Cpf</th>
+                <td>{{ cidadao.cpf }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('cidadao_index') }}">back to list</a>
+
+    <a href="{{ path('cidadao_edit', {'id': cidadao.id}) }}">edit</a>
+
+    {{ include('cidadao/_delete_form.html.twig') }}
+{% endblock %}

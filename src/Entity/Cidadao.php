@@ -1,0 +1,244 @@
+<?php
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\CidadaoRepository")
+ */
+class Cidadao
+{
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=200)
+     */
+    private $nome;
+
+    /**
+     * @ORM\Column(type="string", length=11, nullable=true)
+     */
+    private $cpf;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dataNotificacao;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $sivep;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $idade;
+
+    /**
+     * @ORM\Column(type="string", length=1)
+     */
+    private $sexo;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dataInicioSintoma;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $internacaoUti;
+
+    /**
+     * @ORM\Column(type="string", length=1, nullable=true)
+     */
+    private $usoSuporteVentilatorio;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $raioX;
+
+    /**
+     * @ORM\Column(type="string", length=1, nullable=true)
+     */
+    private $resultadoExame;
+
+    /**
+     * @ORM\Column(type="string", length=1, nullable=true)
+     */
+    private $evolucao;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dataEvolucao;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getNome(): ?string
+    {
+        return $this->nome;
+    }
+
+    public function setNome(string $nome): self
+    {
+        $this->nome = $nome;
+
+        return $this;
+    }
+
+    public function getCpf(): ?string
+    {
+        return $this->cpf;
+    }
+
+    public function setCpf(string $cpf): self
+    {
+        $this->cpf = $cpf;
+
+        return $this;
+    }
+
+    public function getDataNotificacao(): ?\DateTimeInterface
+    {
+        return $this->dataNotificacao;
+    }
+
+    public function setDataNotificacao(\DateTimeInterface $dataNotificacao): self
+    {
+        $this->dataNotificacao = $dataNotificacao;
+
+        return $this;
+    }
+
+    public function getSivep(): ?string
+    {
+        return $this->sivep;
+    }
+
+    public function setSivep(?string $sivep): self
+    {
+        $this->sivep = $sivep;
+
+        return $this;
+    }
+
+    public function getIdade(): ?int
+    {
+        return $this->idade;
+    }
+
+    public function setIdade(int $idade): self
+    {
+        $this->idade = $idade;
+
+        return $this;
+    }
+
+    public function getSexo(): ?string
+    {
+        return $this->sexo;
+    }
+
+    public function setSexo(string $sexo): self
+    {
+        $this->sexo = $sexo;
+
+        return $this;
+    }
+
+    public function getDataInicioSintoma(): ?\DateTimeInterface
+    {
+        return $this->dataInicioSintoma;
+    }
+
+    public function setDataInicioSintoma(\DateTimeInterface $dataInicioSintoma): self
+    {
+        $this->dataInicioSintoma = $dataInicioSintoma;
+
+        return $this;
+    }
+
+    public function getInternacaoUti(): ?bool
+    {
+        return $this->internacaoUti;
+    }
+
+    public function setInternacaoUti(bool $internacaoUti): self
+    {
+        $this->internacaoUti = $internacaoUti;
+
+        return $this;
+    }
+
+    public function getUsoSuporteVentilatorio(): ?string
+    {
+        return $this->usoSuporteVentilatorio;
+    }
+
+    public function setUsoSuporteVentilatorio(?string $usoSuporteVentilatorio): self
+    {
+        $this->usoSuporteVentilatorio = $usoSuporteVentilatorio;
+
+        return $this;
+    }
+
+    public function getRaioX(): ?string
+    {
+        return $this->raioX;
+    }
+
+    public function setRaioX(?string $raioX): self
+    {
+        $this->raioX = $raioX;
+
+        return $this;
+    }
+
+    public function getResultadoExame(): ?string
+    {
+        return $this->resultadoExame;
+    }
+
+    public function setResultadoExame(?string $resultadoExame): self
+    {
+        $this->resultadoExame = $resultadoExame;
+
+        return $this;
+    }
+
+    public function getEvolucao(): ?string
+    {
+        return $this->evolucao;
+    }
+
+    public function setEvolucao(?string $evolucao): self
+    {
+        $this->evolucao = $evolucao;
+
+        return $this;
+    }
+
+    public function getDataEvolucao(): ?\DateTimeInterface
+    {
+        return $this->dataEvolucao;
+    }
+
+    public function setDataEvolucao(?\DateTimeInterface $dataEvolucao): self
+    {
+        $this->dataEvolucao = $dataEvolucao;
+
+        return $this;
+    }
+}

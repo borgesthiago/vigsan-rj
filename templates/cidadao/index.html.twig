@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cidadao index{% endblock %}
+
+{% block body %}
+    <h1>Cidadao index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Cpf</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cidadao in cidadaos %}
+            <tr>
+                <td>{{ cidadao.id }}</td>
+                <td>{{ cidadao.nome }}</td>
+                <td>{{ cidadao.cpf }}</td>
+                <td>
+                    <a href="{{ path('cidadao_show', {'id': cidadao.id}) }}">show</a>
+                    <a href="{{ path('cidadao_edit', {'id': cidadao.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('cidadao_new') }}">Create new</a>
+{% endblock %}
