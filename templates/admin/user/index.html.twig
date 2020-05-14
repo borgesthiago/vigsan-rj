@@ -1,0 +1,67 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}UserPessoa index{% endblock %}
+
+{% block body %}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Listagem de Login - Administradores</h6>
+        <a href="{{ path('user_admin_new') }}" class="btn btn-outline-success btn-sm float-right mb-2">
+            <i class="fa fa-plus-circle"></i>
+            Novo
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Login</th>
+                        <th>Nome</th>
+                        <th>Contato</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.login }}</td>
+                        <td>{{ user.nome }}</td>
+                        <td>{{ user.telefone ? user.telefone : user.celular }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{{ path('user_admin_show', {'id': user.id}) }}"
+                                    class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a href="{{ path('user_admin_edit', {'id': user.id}) }}"
+                                    class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">nenhum registro encontrado.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+$(document).ready(function() {
+  $('#dataTable').DataTable({
+      "language": {
+          "url": "../../../datatables/portuguese-brasil.json"
+      }
+  });
+});
+</script>
+{% endblock %}
+

@@ -1,0 +1,38 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}UserPessoa{% endblock %}
+
+{% block body %}
+ <div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h5 class="m-0 font-weight-bold text-primary">{{ (user_pessoa.nome)|upper }} </h5>
+        {{ include('admin/user_pessoa/_delete_form.html.twig') }}
+    </div>
+    <div class="card-body">
+        <div class="col-sm-12">
+            <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user_pessoa.id }}</td>
+            </tr>
+            <tr>
+                <th>Login</th>
+                <td>{{ user_pessoa.cpf }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user_pessoa.roles ? user_pessoa.roles|json_encode : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+        </div>
+    </div>
+</div>
+<a href="{{ path('user_pessoa_index_admin', {'status' : 'ativos'})}}" class="btn btn-outline-secondary btn-sm">
+    <i class="fa fa-arrow-circle-left"></i> Voltar
+</a>
+<a href="{{ path('user_pessoa_edit_admin', {'id': user_pessoa.id}) }}" class="btn btn-sm btn-outline-info">
+    <i class="fa fa-edit"></i> Editar
+</a>
+{% endblock %}

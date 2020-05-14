@@ -1,0 +1,15 @@
+
+<div class="form-row">
+    <div class="col-md-10">
+        <div class="form-group">
+            {{ form_label(form.nome) }}
+            {{ form_widget(form.nome) }}
+        </div>
+    </div>
+</div>
+<a href="{{ path('comorbidade_index')}}" class="btn btn-outline-secondary btn-sm">
+    <i class="fa fa-arrow-circle-left"></i> Voltar
+</a>
+<button class="btn btn-outline-primary btn-sm float-right">
+    <i class="fa fa-save"></i> Salvar
+</button>

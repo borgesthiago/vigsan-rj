@@ -1,0 +1,26 @@
+
+<div class="form-row">
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.cpf) }}
+            {{ form_widget(form.cpf) }}
+        </div>
+    </div>
+    {% if is_granted('ROLE_ADMIN') %}
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ form_label(form.roles) }}
+            {{ form_widget(form.roles) }}
+        </div>
+    </div>
+    {% endif %}
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ form_label(form.password) }}
+            {{ form_widget(form.password) }}
+        </div>
+    </div>
+</div>
+<button class="btn btn-outline-primary btn-sm float-right">
+    <i class="fa fa-save"></i> Salvar
+</button>

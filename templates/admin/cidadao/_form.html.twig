@@ -1,0 +1,127 @@
+
+<div class="form-row">
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ form_label(form.dataNotificacao) }}
+            {{ form_widget(form.dataNotificacao) }}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.unidade) }}
+            {{ form_widget(form.unidade) }}
+        </div>
+    </div>
+     <div class="col-md-3">
+        <div class="form-group">
+            {{ form_label(form.sivep) }}
+            {{ form_widget(form.sivep) }}
+        </div>
+    </div>
+</div>
+<div class="form-row">
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.nome) }}
+            {{ form_widget(form.nome) }}
+        </div>
+    </div>
+     <div class="col-md-2">
+        <div class="form-group">
+            {{ form_label(form.cpf) }}
+            {{ form_widget(form.cpf) }}
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            {{ form_label(form.idade) }}
+            {{ form_widget(form.idade) }}
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            {{ form_label(form.sexo) }}
+            {{ form_widget(form.sexo) }}
+        </div>
+    </div>
+</div>
+<div class="form-row">
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ form_label(form.bairro) }}
+            {{ form_widget(form.bairro) }}
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            {{ form_label(form.telefone) }}
+            {{ form_widget(form.telefone) }}
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ form_label(form.dataInicioSintoma) }}
+            {{ form_widget(form.dataInicioSintoma) }}
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            {{ form_label(form.usoSuporteVentilatorio) }}
+            {{ form_widget(form.usoSuporteVentilatorio) }}
+        </div>
+    </div>
+</div>
+<div class="form-row">
+    <div class="col-md-2">
+        <div class="form-group">
+            {{ form_label(form.raioX) }}
+            {{ form_widget(form.raioX) }}
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            {{ form_label(form.resultadoExame) }}
+            {{ form_widget(form.resultadoExame) }}
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ form_label(form.evolucao) }}
+            {{ form_widget(form.evolucao) }}
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ form_label(form.dataEvolucao) }}
+            {{ form_widget(form.dataEvolucao) }}
+        </div>
+    </div>
+</div>
+<div class="form-row">
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ form_label(form.internacaoUti) }}
+            {{ form_widget(form.internacaoUti) }}
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="form-group">
+            {{ form_label(form.comorbidade) }}
+            {{ form_widget(form.comorbidade) }}
+        </div>
+    </div>
+</div>
+<div class="form-row">
+    <div class="col-md-10">
+        <div class="form-group">
+            {{ form_label(form.observacao) }}
+            {{ form_widget(form.observacao) }}
+        </div>
+    </div>
+</div>
+<a href="{{ path('cidadao_index_admin')}}" class="btn btn-outline-secondary btn-sm">
+    <i class="fa fa-arrow-circle-left"></i> Voltar
+</a>
+<button class="btn btn-outline-primary btn-sm float-right">
+    <i class="fa fa-save"></i> Salvar
+</button>

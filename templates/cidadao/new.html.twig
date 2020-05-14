@@ -1,11 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Cidadao{% endblock %}
+{% block title %}Novo Cidadao{% endblock %}
 
 {% block body %}
-    <h1>Create new Cidadao</h1>
-
-    {{ include('cidadao/_form.html.twig') }}
-
-    <a href="{{ path('cidadao_index') }}">back to list</a>
+ <div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Novo Cidadão</h6>
+    </div>
+    <div class="card-body">
+        {{ form_start(form, {'class':'form-group', 'attr': { 'id':'cidadao_form'}}) }}
+        {% form_theme form with 'bootstrap_4_layout.html.twig' %}
+            {{ include('cidadao/_form.html.twig') }}
+        {{ form_end(form) }}
+    </div>
+</div>
 {% endblock %}

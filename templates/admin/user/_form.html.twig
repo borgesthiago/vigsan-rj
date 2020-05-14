@@ -1,0 +1,115 @@
+<div class="form-row">
+  <div class="col-md-5">
+        <div class="form-group">
+            {{ form_label(form.nome) }}
+            {{ form_widget(form.nome) }}
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            {{ form_label(form.status) }}
+            {{ form_widget(form.status) }}
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ form_label(form.cargo) }}
+            {{ form_widget(form.cargo) }}
+        </div>
+    </div>
+</div>
+<div class="form-row">
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            {{ form_label(form.telefone) }}
+            {{ form_widget(form.telefone) }}
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            {{ form_label(form.celular) }}
+            {{ form_widget(form.celular) }}
+        </div>
+    </div>
+</div>
+<div class="form-row">
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.login) }}
+            {{ form_widget(form.login) }}
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ form_label(form.roles) }}
+            {{ form_widget(form.roles) }}
+        </div>
+    </div>
+     <div class="col-md-3">
+        <div class="form-group">
+            {{ form_label(form.password) }}
+            {{ form_widget(form.password) }}
+        </div>
+    </div>
+</div>
+<hr>
+<h4>Endereço</h4>
+<hr>
+<div class="form-row">
+    <div class="col-md-2">
+        <div class="form-group">
+            {{ form_label(form.cep) }}
+            {{ form_widget(form.cep) }}
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="form-group">
+            {{ form_label(form.logradouro) }}<span class="small text-muted"> (Rua, Avenida, Travessa...)</span>
+            {{ form_widget(form.logradouro) }}
+        </div>
+    </div>
+    <div class="col-md-1">
+        <div class="form-group">
+            {{ form_label(form.numero) }}
+            {{ form_widget(form.numero) }}
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            {{ form_label(form.complemento) }}
+            {{ form_widget(form.complemento) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.bairro) }}
+            {{ form_widget(form.bairro) }}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.cidade) }}
+            {{ form_widget(form.cidade) }}
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            {{ form_label(form.uf) }}
+            {{ form_widget(form.uf) }}
+        </div>
+    </div>
+</div>
+<a href="{{ path('user_admin_index')}}" class="btn btn-outline-secondary btn-sm">
+    <i class="fa fa-arrow-circle-left"></i> Voltar
+</a>
+<button class="btn btn-outline-primary btn-sm float-right">
+    <i class="fa fa-save"></i> Salvar
+</button>

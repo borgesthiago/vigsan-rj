@@ -1,30 +1,108 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Cidadao{% endblock %}
+{% block title %}Cidadão{% endblock %}
 
 {% block body %}
-    <h1>Cidadao</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ cidadao.id }}</td>
-            </tr>
-            <tr>
-                <th>Nome</th>
-                <td>{{ cidadao.nome }}</td>
-            </tr>
-            <tr>
-                <th>Cpf</th>
-                <td>{{ cidadao.cpf }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('cidadao_index') }}">back to list</a>
-
-    <a href="{{ path('cidadao_edit', {'id': cidadao.id}) }}">edit</a>
-
-    {{ include('cidadao/_delete_form.html.twig') }}
+ <div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h5 class="m-0 font-weight-bold text-primary">{{ (cidadao.nome)|upper }}<h5>
+        <span class="float-right"><a href="#" class="btn btn-sm btn-primary" onClick="window.print()"><i class="fa fa-print"></i></a></span>
+        {% set status = get_static_method('App\\Enum\\StatusCidadaoEnum', 'getStatus') %}
+        <h6>{{ status[cidadao.status] }}</h6>
+    </div>
+    <div class="card-body">
+        <div class="col-sm-12">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>Data Notificacao</th>
+                        <td>{{ cidadao.dataNotificacao ? cidadao.dataNotificacao|date('d/m/Y') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Unidade</th>
+                        <td>{{ cidadao.unidade.nome }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nome</th>
+                        <td>{{ cidadao.nome }}</td>
+                    </tr>
+                    <tr>
+                        <th>Cpf</th>
+                        <td>{{ cidadao.cpf }}</td>
+                    </tr>
+                    <tr>
+                        <th>Telefone</th>
+                        <td>{{ cidadao.telefone }}</td>
+                    </tr>
+                    <tr>
+                        <th>Bairro</th>
+                        <td>{{ cidadao.bairro }}</td>
+                    </tr>
+                    <tr>
+                        <th>Sivep</th>
+                        <td>{{ cidadao.sivep }}</td>
+                    </tr>
+                    <tr>
+                        <th>Idade</th>
+                        <td>{{ cidadao.idade }}</td>
+                    </tr>
+                    <tr>
+                        <th>Sexo</th>
+                        <td>{{ cidadao.sexo }}</td>
+                    </tr>
+                    <tr>
+                        <th>Data Início Sintoma</th>
+                        <td>{{ cidadao.dataInicioSintoma ? cidadao.dataInicioSintoma|date('d/m/Y') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Internação Uti</th>
+                        <td>{{ cidadao.internacaoUti ? 'Sim' : 'Não' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Uso Suporte Ventilatório</th>
+                        {% set suporte = get_static_method('App\\Enum\\VentilacaoEnum', 'getTipo') %}
+                        <td>{{ suporte[cidadao.usoSuporteVentilatorio] }}</td>
+                    </tr>
+                    <tr>
+                        <th>Raio X</th>
+                        {% set raio = get_static_method('App\\Enum\\RaioXEnum', 'getTipo') %}
+                        <td>{{ raio[cidadao.raioX] }}</td>
+                    </tr>
+                    <tr>
+                        <th>Resultado Exame</th>
+                        {% set exame = get_static_method('App\\Enum\\ResultadoExameEnum', 'getTipo') %}
+                        <td>{{ exame[cidadao.resultadoExame] }}</td>
+                    </tr>
+                    <tr>
+                        <th>Evolução</th>
+                        {% set evolucao = get_static_method('App\\Enum\\EvolucaoEnum', 'getTipo') %}
+                        <td>{{ evolucao[cidadao.evolucao] }}</td>
+                    </tr>
+                    <tr>
+                        <th>Data Evolução</th>
+                        <td>{{ cidadao.dataEvolucao ? cidadao.dataEvolucao|date('d/m/Y') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Comorbidade(s)</th>
+                        <td>
+                        {% for comorbidade in cidadao.comorbidade %}
+                            {{ comorbidade.nome}} |
+                        {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Observação</th>
+                        <td>{{ cidadao.observacao|raw }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<a href="{{ path('cidadao_index')}}" class="btn btn-outline-secondary btn-sm">
+    <i class="fa fa-arrow-circle-left"></i> Voltar
+</a>
+<a href="{{ path('cidadao_edit', {'id': cidadao.id}) }}" class="btn btn-sm btn-outline-info">
+    <i class="fa fa-edit"></i> Editar
+</a>
 {% endblock %}

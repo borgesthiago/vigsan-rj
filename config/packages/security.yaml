@@ -1,14 +1,55 @@
 security:
+    encoders:
+        App\Entity\UserAdmin:
+            algorithm: auto
+        App\Entity\UserPessoa:
+            algorithm: auto
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        users_in_memory: { memory: null }
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\UserPessoa
+                property: cpf
+        app_admin_user_provider:
+            entity:
+                class: App\Entity\UserAdmin
+                property: login
+        # used to reload user from session & other features (e.g. switch_user)
+        # used to reload user from session & other features (e.g. switch_user)
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        admin:
+            pattern: ^/admin/
+            anonymous: lazy
+            guard:
+                authenticators:
+                    - App\Security\AdminLoginFormAuthenticator
+                entry_point: App\Security\AdminLoginFormAuthenticator
+                provider: app_admin_user_provider
+            form_login:
+                login_path: admin_login
+                check_path: admin_login
+                provider: app_admin_user_provider
+            logout:
+                path: admin_logout
+                target: admin_login
         main:
             anonymous: lazy
-            provider: users_in_memory
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+                provider: app_user_provider
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                provider: app_user_provider
+            logout:
+                path: app_logout
+                target: app_login
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -19,5 +60,13 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /admin/^, roles: ROLE_ADMIN }
+        - { path: ^/, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_USER }
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_ADMIN:       [ROLE_USER, ROLE_TECNICO]
+        ROLE_TECNICO:     [ROLE_USER]
+        ROLE_UNIDADE:     [ROLE_USER]

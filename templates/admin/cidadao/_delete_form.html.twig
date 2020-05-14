@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('cidadao_delete_admin', {'id': cidadao.id}) }}" onsubmit="return confirm('Deseja realmente excluir?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cidadao.id) }}">
+    <button class="btn btn-outline-danger btn-sm float-right mb-2"><i class="fa fa-trash"></i> Delete</button>
+</form>

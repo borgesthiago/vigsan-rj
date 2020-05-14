@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comorbidade{% endblock %}
+
+{% block body %}
+ <div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h5 class="m-0 font-weight-bold text-primary">{{ (comorbidade.nome)|upper }} </h5>
+    </div>
+    <div class="card-body">
+        <div class="col-sm-12">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ comorbidade.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nome</th>
+                        <td>{{ comorbidade.nome }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<a href="{{ path('comorbidade_index')}}" class="btn btn-outline-secondary btn-sm">
+    <i class="fa fa-arrow-circle-left"></i> Voltar
+</a>
+<a href="{{ path('comorbidade_edit', {'id': comorbidade.id}) }}" class="btn btn-sm btn-outline-info">
+    <i class="fa fa-edit"></i> Editar
+</a>
+{% endblock %}

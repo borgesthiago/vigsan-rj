@@ -1,0 +1,86 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Unidade{% endblock %}
+
+{% block body %}
+ <div class="card shadow mb-4">
+    <div class="card-header py-3">
+        {{ include('admin/unidade/_delete_form.html.twig') }}
+    </div>
+    <div class="card-body">
+        <div class="col-sm-12">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ unidade.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nome</th>
+                        <td>{{ unidade.nome }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <h5 class="text-center"><strong>Cidadão</strong></h5>
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Sivep</th>
+                        <th>Idade (anos)</th>
+                        <th>Sexo</th>
+                        <th>Dias</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for cidadao in cidadaos %}
+                    {% if cidadao.evolucao %}
+                        {% set texto = '' %}
+                    {% else %}
+                        {% set texto = 'danger' %}
+                    {% endif %}
+                    <tr class="table-{{ texto }}">
+                        <td>{{ cidadao.nome }}</td>
+                        <td>{{ cidadao.sivep }}</td>
+                        <td>{{ cidadao.idade }}</td>
+                        <td>{{ cidadao.sexo }}</td>
+                        {% set difference = date().diff(date(cidadao.dataNotificacao)) %}
+                        {% set leftDays = difference.days %}
+                        <td>
+                            {{ leftDays }}
+                            {% if leftDays > 20 and cidadao.dataEvolucao == null %}
+                                <i class="fa fa-exclamation-circle vermelho"></i>
+                            {% endif %}
+                        </td>                        
+                        {% set status = get_static_method('App\\Enum\\StatusCidadaoEnum', 'getStatus') %}
+                        <td>{{ status[cidadao.status] }}</td>
+                        <td>
+                           
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">nenhum registro encontrado</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div>
+                <i class="fa fa-square vermelho"></i> Cidadão sem Evolução informada
+            </div>
+            <div>
+                <i class="fa fa-exclamation-circle vermelho"></i> Notificação sem andamento
+            </div>
+        </div>
+    </div>
+</div>
+<a href="{{ path('unidade_index_admin')}}" class="btn btn-outline-secondary btn-sm">
+    <i class="fa fa-arrow-circle-left"></i> Voltar
+</a>
+<a href="{{ path('unidade_edit_admin', {'id': unidade.id}) }}" class="btn btn-sm btn-outline-info">
+    <i class="fa fa-edit"></i> Editar
+</a>
+{% endblock %}

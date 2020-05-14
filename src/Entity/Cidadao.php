@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -52,7 +54,7 @@ class Cidadao
     private $dataInicioSintoma;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string", length=1)
      */
     private $internacaoUti;
 
@@ -80,6 +82,42 @@ class Cidadao
      * @ORM\Column(type="date", nullable=true)
      */
     private $dataEvolucao;
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true)
+     */
+    private $observacao;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Unidade", inversedBy="paciente")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $unidade;
+
+    /**
+     * @ORM\Column(type="string", length=11, nullable=true)
+     */
+    private $telefone;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $bairro;
+
+    /**
+     * @ORM\Column(type="string", length=1)
+     */
+    private $status;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Comorbidade")
+     */
+    private $comorbidade;
+
+    public function __construct()
+    {
+        $this->comorbidade = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -170,12 +208,12 @@ class Cidadao
         return $this;
     }
 
-    public function getInternacaoUti(): ?bool
+    public function getInternacaoUti(): ?string
     {
         return $this->internacaoUti;
     }
 
-    public function setInternacaoUti(bool $internacaoUti): self
+    public function setInternacaoUti(string $internacaoUti): self
     {
         $this->internacaoUti = $internacaoUti;
 
@@ -238,6 +276,92 @@ class Cidadao
     public function setDataEvolucao(?\DateTimeInterface $dataEvolucao): self
     {
         $this->dataEvolucao = $dataEvolucao;
+
+        return $this;
+    }
+
+    public function getObservacao(): ?string
+    {
+        return $this->observacao;
+    }
+
+    public function setObservacao(?string $observacao): self
+    {
+        $this->observacao = $observacao;
+
+        return $this;
+    }
+
+    public function getUnidade(): ?Unidade
+    {
+        return $this->unidade;
+    }
+
+    public function setUnidade(?Unidade $unidade): self
+    {
+        $this->unidade = $unidade;
+
+        return $this;
+    }
+
+    public function getTelefone(): ?string
+    {
+        return $this->telefone;
+    }
+
+    public function setTelefone(?string $telefone): self
+    {
+        $this->telefone = $telefone;
+
+        return $this;
+    }
+
+    public function getBairro(): ?string
+    {
+        return $this->bairro;
+    }
+
+    public function setBairro(?string $bairro): self
+    {
+        $this->bairro = $bairro;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comorbidade[]
+     */
+    public function getComorbidade(): Collection
+    {
+        return $this->comorbidade;
+    }
+
+    public function addComorbidade(Comorbidade $comorbidade): self
+    {
+        if (!$this->comorbidade->contains($comorbidade)) {
+            $this->comorbidade[] = $comorbidade;
+        }
+
+        return $this;
+    }
+
+    public function removeComorbidade(Comorbidade $comorbidade): self
+    {
+        if ($this->comorbidade->contains($comorbidade)) {
+            $this->comorbidade->removeElement($comorbidade);
+        }
 
         return $this;
     }

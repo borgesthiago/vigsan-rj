@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Cidadao;
 use App\Form\CidadaoType;
+use App\Enum\StatusCidadaoEnum;
+use App\Enum\ResultadoExameEnum;
 use App\Repository\CidadaoRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/cidadao")
@@ -35,10 +37,16 @@ class CidadaoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $cidadao->setStatus(StatusCidadaoEnum::DESCARTADO);
+
+            if ($cidadao->getResultadoExame() == ResultadoExameEnum::DETECTAVEL) {
+                $cidadao->setStatus(StatusCidadaoEnum::CONFIRMADO);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($cidadao);
             $entityManager->flush();
-
+            
+            $this->addFlash("success", "Cadastrado com sucesso.");
             return $this->redirectToRoute('cidadao_index');
         }
 
@@ -67,6 +75,11 @@ class CidadaoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $cidadao->setStatus(StatusCidadaoEnum::DESCARTADO);
+
+            if ($cidadao->getResultadoExame() == ResultadoExameEnum::DETECTAVEL) {
+                $cidadao->setStatus(StatusCidadaoEnum::CONFIRMADO);
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('cidadao_index');
@@ -76,19 +89,5 @@ class CidadaoController extends AbstractController
             'cidadao' => $cidadao,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="cidadao_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Cidadao $cidadao): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$cidadao->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($cidadao);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('cidadao_index');
     }
 }

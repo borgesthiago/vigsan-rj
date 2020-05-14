@@ -1,0 +1,71 @@
+.espaco{
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 20px;
+}
+
+.delete.form {
+    display: inline;
+}
+
+.direita{
+    float: right;
+    margin-right: auto;
+    margin-bottom: 5px;
+}
+select[readonly] {
+    opacity: .45;
+    pointer-events: none;
+    touch-action: none;
+}
+input[readonly] {
+    opacity: .45;
+    pointer-events: none;
+    touch-action: none;
+}
+.bg-login-image{
+  background: url("../image/logo.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 70%;
+}
+@-webkit-keyframes invalid {
+    from { background-color: red; }
+    to { background-color: inherit; }
+  }
+  @-moz-keyframes invalid {
+    from { background-color: red; }
+    to { background-color: inherit; }
+  }
+  @-o-keyframes invalid {
+    from { background-color: red; }
+    to { background-color: inherit; }
+  }
+  @keyframes invalid {
+    from { background-color: red; }
+    to { background-color: inherit; }
+  }
+  .prioridade.urgente {
+    -webkit-animation: invalid 1s infinite; /* Safari 4+ */
+    -moz-animation:    invalid 1s infinite; /* Fx 5+ */
+    -o-animation:      invalid 1s infinite; /* Opera 12+ */
+    animation:         invalid 1s infinite; /* IE 10+ */
+  }
+  
+  td {
+      padding: 1em;
+  }
+  @media print {
+    .no-print {
+      display: none;
+      position: relative;
+      height: 50;
+      width: 50;
+    }
+    .btn-sm {
+      display: none;
+    }
+  }
+  .vermelho{
+    color: red;
+  }

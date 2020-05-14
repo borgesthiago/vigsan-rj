@@ -1,0 +1,66 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Unidades{% endblock %}
+
+{% block body %}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Listagem de Unidades</h6>
+        {% if not is_granted('ROLE_UNIDADE') %}
+        <a href="{{ path('unidade_new_admin') }}" class="btn btn-outline-success btn-sm float-right mb-2">
+            <i class="fa fa-plus-circle"></i>
+            Novo
+        </a>
+        {% endif %}
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nome</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for unidade in unidades %}
+                    <tr>
+                        <td>{{ unidade.id }}</td>
+                        <td>{{ unidade.nome }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{{ path('unidade_show_admin', {'id': unidade.id}) }}"
+                                    class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a href="{{ path('unidade_edit_admin', {'id': unidade.id}) }}"
+                                    class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">nenhum registro encontrado</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+<script>
+$(document).ready(function() {
+  $('#dataTable').DataTable({
+      "language": {
+          "url": "../../datatables/portuguese-brasil.json"
+      }
+  });
+});
+</script>
+{% endblock %}
+
